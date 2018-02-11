@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -15,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import uk.co.wedgetech.hostpinger.R
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.tasks.HostService
-import uk.co.wedgetech.hostpinger.ui.HostsAdapter.Companion.BY_LATENCY
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,11 +28,10 @@ class MainActivity : AppCompatActivity() {
                 R.array.sort_by_array, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
         sortby_spinner.adapter = adapter
-        //sortby_spinner.setSelection(BY_LATENCY)
 
         hostsAdapter = HostsAdapter()
 
-        val observable = HostService.instance.getHosts()
+        val observable = HostService().getHosts()
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<List<Host>> {
@@ -53,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = hostsAdapter
 
+        // Setup spinner for picking sort order
         sortby_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }

@@ -13,21 +13,6 @@ class HostsAdapter : RecyclerView.Adapter<HostCardHolder>() {
 
     private var items: List<Host> = List<Host>(0,{Host("","","")})
 
-    init {
-        HostLatencyMemoryCache.getModelChanges()
-                .subscribe(object : Observer<HostLatencyMemoryCache> {
-            override fun onNext(t: HostLatencyMemoryCache) {
-                sort()
-                notifyDataSetChanged()
-            }
-
-            override fun onComplete() {}
-            override fun onError(e: Throwable) {}
-            override fun onSubscribe(d: Disposable) {}
-        })
-
-    }
-
     private var sortMethodInternal = BY_NAME
     var sortMethod: Int
         get() = sortMethodInternal
@@ -35,14 +20,12 @@ class HostsAdapter : RecyclerView.Adapter<HostCardHolder>() {
             if (sortMethodInternal!=value) {
                 sortMethodInternal = value
                 sort()
-                notifyDataSetChanged()
             }
         }
 
     fun setHosts(hosts :List<Host>) {
         items = hosts
         sort()
-        notifyDataSetChanged()
     }
 
     internal fun sort() {
@@ -52,12 +35,12 @@ class HostsAdapter : RecyclerView.Adapter<HostCardHolder>() {
             BY_URL -> items = items.sortedWith(compareBy(Host::url))
 
             BY_LATENCY -> items = items.sorted()
-
         }
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HostCardHolder {
-        val view = LayoutInflater.from(parent.getContext())
+        val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.card_host, parent, false)
         return HostCardHolder(view)
     }

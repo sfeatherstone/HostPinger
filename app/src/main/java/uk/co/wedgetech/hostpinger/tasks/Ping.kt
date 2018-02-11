@@ -25,7 +25,7 @@ object Ping {
                 if (latency!=null)
                     emitter.onSuccess(latency)
                 else
-                    emitter.onError(throw Exception())
+                    emitter.onError(Exception())
             }
             return single
         }
