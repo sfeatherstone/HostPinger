@@ -10,7 +10,7 @@ object HostLatencyMemoryCache {
 
     operator fun set(key: String, value: Long?): Long? {
         val original = latencyCache[key]
-        if (original!=value) {
+        if (original!=value || !latencyCache.containsKey(key)) {
             latencyCache[key] = value
         }
         return original
@@ -19,4 +19,8 @@ object HostLatencyMemoryCache {
     fun containsKey(key:String) :Boolean = latencyCache.containsKey(key)
 
     private val latencyCache:  MutableMap<String, Long?> = HashMap<String, Long?>()
+
+    internal fun clear() {
+        latencyCache.clear()
+    }
 }
