@@ -18,6 +18,7 @@ The image for TradeMe redirecting from http to https was a bit of a headache. Fo
 More unit test coverage would be good.<br>
 The host list could be saved as a property of the Activity. Currently the ViewModel prevents this from being apparent. <br> 
 Using the Kotlin viewbinding for ViewHolders was fiddly. And required turning `experimental` on.
+The error handling could be improved. Better feedback.<br>
 The UI could use the help of a UX designer...<br>
 
 ### Third Party Libraries
