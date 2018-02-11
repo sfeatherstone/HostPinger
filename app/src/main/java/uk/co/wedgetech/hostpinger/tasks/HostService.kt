@@ -19,7 +19,7 @@ class HostService {
     init {
         val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(OkHttpClient())
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
@@ -34,5 +34,6 @@ class HostService {
     companion object {
         //Added to allow for testing
         internal var BASE_URL : String = BuildConfig.BASE_REST_URL
+        val okHttpClient = OkHttpClient()
     }
 }

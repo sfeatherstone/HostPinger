@@ -52,9 +52,9 @@ class HostsAdapter : RecyclerView.Adapter<HostCardHolder>() {
     }
 
     companion object {
-        val BY_NAME = 0
-        val BY_URL = 1
-        val BY_LATENCY= 2
+        const val BY_NAME = 0
+        const val BY_URL = 1
+        const val BY_LATENCY= 2
     }
 
 }

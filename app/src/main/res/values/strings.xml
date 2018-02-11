@@ -3,6 +3,10 @@
 
     <string name="action_settings">Settings</string>
     <string name="sort_by_spinner_label">Sort By:</string>
+    <string name="error_host_fetch">Error getting host list.</string>
+    <string name="loading_latency_text">Testing...</string>
+    <string name="error_text">Error</string>
+    <string name="microsecond_formater">%dms</string>
     <string-array name="sort_by_array">
         <item>Name</item>
         <item>Url</item>
