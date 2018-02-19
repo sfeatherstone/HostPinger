@@ -13,29 +13,8 @@ class HostsAdapter : RecyclerView.Adapter<HostCardHolder>() {
 
     private var items: List<Host> = List<Host>(0,{Host("","","")})
 
-    private var sortMethodInternal = BY_NAME
-    var sortMethod: Int
-        get() = sortMethodInternal
-        set(value) {
-            if (sortMethodInternal!=value) {
-                sortMethodInternal = value
-                sort()
-            }
-        }
-
     fun setHosts(hosts :List<Host>) {
         items = hosts
-        sort()
-    }
-
-    internal fun sort() {
-        when(sortMethod) {
-            BY_NAME -> items = items.sortedWith(compareBy(Host::name))
-
-            BY_URL -> items = items.sortedWith(compareBy(Host::url))
-
-            BY_LATENCY -> items = items.sorted()
-        }
         notifyDataSetChanged()
     }
 
@@ -49,12 +28,6 @@ class HostsAdapter : RecyclerView.Adapter<HostCardHolder>() {
 
     override fun onBindViewHolder(holder: HostCardHolder, position: Int) {
         return holder.bindHost(items[position])
-    }
-
-    companion object {
-        const val BY_NAME = 0
-        const val BY_URL = 1
-        const val BY_LATENCY= 2
     }
 
 }

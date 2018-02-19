@@ -22,7 +22,7 @@ class HostsViewModel:ViewModel() {
     val error: LiveData<NetworkError> by lazy { errorMutable }
 
 
-    fun getHosts() {
+    fun fetchHosts() {
         val observable = hostsService.getHosts()
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -40,5 +40,31 @@ class HostsViewModel:ViewModel() {
                 })
     }
 
+    internal var internalSortOrder = BY_NAME
+
+    var sortOrder: Int
+        get() = internalSortOrder
+        set(value) {
+            if (internalSortOrder!=value) {
+                internalSortOrder = value
+                sort()
+            }
+        }
+
+    internal fun sort() {
+        when (sortOrder) {
+            BY_NAME -> hostsMutable.value = hosts.value?.sortedWith(compareBy(Host::name))
+
+            BY_URL -> hostsMutable.value = hosts.value?.sortedWith(compareBy(Host::url))
+
+            BY_LATENCY -> hostsMutable.value = hosts.value?.sorted()
+        }
+    }
+
+    companion object {
+        const val BY_NAME = 0
+        const val BY_URL = 1
+        const val BY_LATENCY= 2
+    }
 
 }

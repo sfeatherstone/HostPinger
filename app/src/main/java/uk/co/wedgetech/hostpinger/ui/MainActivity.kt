@@ -17,6 +17,7 @@ import uk.co.wedgetech.hostpinger.model.NetworkError
 class MainActivity : AppCompatActivity() {
 
     internal lateinit var hostsAdapter :HostsAdapter
+    internal val viewModel : HostsViewModel by lazy { ViewModelProviders.of(this).get(HostsViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         hostsAdapter = HostsAdapter()
 
         //Catch host data
-        val viewModel : HostsViewModel = ViewModelProviders.of(this).get(HostsViewModel::class.java)
         val hostsObserver = Observer<List<Host>> { hosts ->
             if (hosts!=null)    {
                 hostsAdapter.setHosts(hosts)
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.error.observe(this, errorObserver)
 
         //Fetch hosts
-        viewModel.getHosts()
+        viewModel.fetchHosts()
 
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = hostsAdapter
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                hostsAdapter.sortMethod = position
+                viewModel.sortOrder = position
             }
 
         }
