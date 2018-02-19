@@ -12,7 +12,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_REST_URL", "\"https://gist.githubusercontent.com/anonymous/290132e587b77155eebe44630fcd12cb/raw/777e85227d0c1c16e466475bb438e0807900155c/\""
+
+        buildConfigField "String", "BASE_REST_URL", "\"https://gist.githubusercontent.com/sfeatherstone/8978299568cd6b688a4dafdc630f8bfd/raw/1eb676f87f733f6a6a42d2272b1a74838c486ea3/\""
     }
     buildTypes {
         release {
