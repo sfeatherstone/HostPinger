@@ -8,16 +8,17 @@ import androidx.content.edit
 /***
  * Class stores the current UI mode. It also can be used to find what the next one is, or flip it and get the Intent.
  */
+//TODO get appContext from DI
 class UIMode(applicationContext : Context) {
 
     sealed class Framework {
         object MVVM : Framework() {
             override val asString: String
-                    get() = "MVVM"
+                    get() = MVVM_NAME
         }
         object MVP : Framework(){
             override val asString: String
-                    get() = "MVP"
+                    get() = MVP_NAME
         }
         abstract val asString : String
     }
@@ -61,9 +62,18 @@ class UIMode(applicationContext : Context) {
     }
 
     companion object {
-        val KEY_SORT_ORDER = "sortOrder"
-        val KEY_MODE = "mode"
+        //Sort order
+        const val BY_NAME = 0
+        const val BY_URL = 1
+        const val BY_LATENCY= 2
 
-        val FILE_NAME = "UIMode"
+
+        private val MVVM_NAME = "MVVM"
+        private val MVP_NAME = "MVP"
+
+        private val KEY_SORT_ORDER = "sortOrder"
+        private val KEY_MODE = "mode"
+
+        private val FILE_NAME = "UIMode"
      }
 }

@@ -7,6 +7,9 @@ import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import uk.co.wedgetech.hostpinger.UIMode.Companion.BY_LATENCY
+import uk.co.wedgetech.hostpinger.UIMode.Companion.BY_NAME
+import uk.co.wedgetech.hostpinger.UIMode.Companion.BY_URL
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.model.NetworkError
 import uk.co.wedgetech.hostpinger.model.tasks.HostService
@@ -64,10 +67,5 @@ class HostsViewModel:ViewModel() {
         hosts.value?.let { hostsMutable.value = sort(it) }
     }
 
-    companion object {
-        const val BY_NAME = 0
-        const val BY_URL = 1
-        const val BY_LATENCY= 2
-    }
 
 }
