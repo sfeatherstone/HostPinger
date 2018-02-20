@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">HostPinger</string>
+    <string name="mvp_activity_title">HostPinger(MVP)</string>
+    <string name="mvvm_activity_title">HostPinger(MVVM)</string>
 
     <string name="action_settings">Settings</string>
     <string name="sort_by_spinner_label">Sort By:</string>

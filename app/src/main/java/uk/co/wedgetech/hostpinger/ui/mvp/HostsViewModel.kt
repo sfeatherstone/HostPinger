@@ -1,4 +1,4 @@
-package uk.co.wedgetech.hostpinger.mvvm.ui
+package uk.co.wedgetech.hostpinger.ui.mvp
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData

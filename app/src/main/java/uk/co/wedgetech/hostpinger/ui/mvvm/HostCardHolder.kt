@@ -1,4 +1,4 @@
-package uk.co.wedgetech.hostpinger.mvvm.ui
+package uk.co.wedgetech.hostpinger.ui.mvvm
 
 import android.support.v7.widget.RecyclerView
 import kotlinx.android.synthetic.main.card_host.*
