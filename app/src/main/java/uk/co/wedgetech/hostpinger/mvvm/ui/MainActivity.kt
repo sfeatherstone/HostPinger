@@ -1,4 +1,4 @@
-package uk.co.wedgetech.hostpinger.ui
+package uk.co.wedgetech.hostpinger.mvvm.ui
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders

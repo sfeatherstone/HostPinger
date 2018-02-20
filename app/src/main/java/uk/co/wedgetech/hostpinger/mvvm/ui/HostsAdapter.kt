@@ -1,13 +1,10 @@
-package uk.co.wedgetech.hostpinger.ui
+package uk.co.wedgetech.hostpinger.mvvm.ui
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
 import uk.co.wedgetech.hostpinger.R
 import uk.co.wedgetech.hostpinger.model.Host
-import uk.co.wedgetech.hostpinger.model.HostLatencyMemoryCache
 
 class HostsAdapter : RecyclerView.Adapter<HostCardHolder>() {
 

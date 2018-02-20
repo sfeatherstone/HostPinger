@@ -1,4 +1,4 @@
-package uk.co.wedgetech.hostpinger.tasks
+package uk.co.wedgetech.hostpinger.model.tasks
 
 import io.reactivex.Single
 import uk.co.wedgetech.hostpinger.model.Host

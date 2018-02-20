@@ -1,10 +1,9 @@
-package uk.co.wedgetech.hostpinger.ui
+package uk.co.wedgetech.hostpinger.mvvm.ui
 
 import android.support.v7.widget.RecyclerView
 import kotlinx.android.synthetic.main.card_host.*
 import kotlinx.android.extensions.LayoutContainer
 import android.view.View
-import com.jakewharton.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,8 +11,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import uk.co.wedgetech.hostpinger.R
 import uk.co.wedgetech.hostpinger.model.Host
-import uk.co.wedgetech.hostpinger.tasks.HostService
-import uk.co.wedgetech.hostpinger.tasks.Ping
+import uk.co.wedgetech.hostpinger.model.tasks.Ping
 
 class HostCardHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 

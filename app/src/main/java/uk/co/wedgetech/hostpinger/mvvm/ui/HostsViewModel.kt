@@ -1,4 +1,4 @@
-package uk.co.wedgetech.hostpinger.ui
+package uk.co.wedgetech.hostpinger.mvvm.ui
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.model.NetworkError
-import uk.co.wedgetech.hostpinger.tasks.HostService
+import uk.co.wedgetech.hostpinger.model.tasks.HostService
 
 class HostsViewModel:ViewModel() {
 

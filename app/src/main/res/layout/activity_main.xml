@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="uk.co.wedgetech.hostpinger.ui.MainActivity">
+    tools:context=".mvvm.ui.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -47,7 +47,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="uk.co.wedgetech.hostpinger.ui.MainActivity"
+        tools:context=".mvvm.ui.MainActivity"
         tools:showIn="@layout/activity_main" />
 
 
