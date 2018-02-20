@@ -28,7 +28,7 @@ class HostsViewModel:ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<List<Host>> {
                     override fun onSuccess(t: List<Host>) {
-                        hostsMutable.value = t
+                        hostsMutable.value = sort(t)
                     }
 
                     override fun onError(e: Throwable) {
@@ -51,14 +51,17 @@ class HostsViewModel:ViewModel() {
             }
         }
 
-    internal fun sort() {
-        when (sortOrder) {
-            BY_NAME -> hostsMutable.value = hosts.value?.sortedWith(compareBy(Host::name))
-
-            BY_URL -> hostsMutable.value = hosts.value?.sortedWith(compareBy(Host::url))
-
-            BY_LATENCY -> hostsMutable.value = hosts.value?.sorted()
+    internal fun sort(toSort : List<Host>): List<Host> {
+        return when (sortOrder) {
+            BY_NAME ->  toSort.sortedWith(compareBy(Host::name))
+            BY_URL -> toSort.sortedWith(compareBy(Host::url))
+            BY_LATENCY -> toSort.sorted()
+            else -> toSort
         }
+    }
+
+    internal fun sort() {
+        hosts.value?.let { hostsMutable.value = sort(it) }
     }
 
     companion object {

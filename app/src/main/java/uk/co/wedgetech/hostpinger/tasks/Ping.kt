@@ -3,6 +3,7 @@ package uk.co.wedgetech.hostpinger.tasks
 import io.reactivex.Single
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.model.HostLatencyMemoryCache
+import uk.co.wedgetech.hostpinger.model.Latency
 import uk.co.wedgetech.hostpinger.utils.makeUrl
 import java.net.InetAddress
 import java.net.Socket
@@ -19,13 +20,14 @@ object Ping {
     }
 
     internal fun getCached(hostName :String) : Single<Long>? {
-        if (HostLatencyMemoryCache.containsKey(hostName)) {
-            val latency = HostLatencyMemoryCache[hostName]
+        val latency = HostLatencyMemoryCache[hostName]
+        if (latency!=null) {
             val single = Single.create<Long> { emitter ->
-                if (latency!=null)
-                    emitter.onSuccess(latency)
-                else
-                    emitter.onError(Exception())
+                if (latency.error == null) {
+                    emitter.onSuccess(latency.value)
+                } else {
+                    emitter.onError(Exception(latency.error))
+                }
             }
             return single
         }
@@ -34,6 +36,7 @@ object Ping {
 
     internal fun pingServer(host :Host) : Single<Long> {
         val single = Single.create<Long> { emitter ->
+            //TODO stop lots of threads being used
             val thread = Thread {
                 try {
                     var totalTime: Long = 0
@@ -43,11 +46,11 @@ object Ping {
 
                     val avgTime = totalTime / 5
                     //Set cache
-                    HostLatencyMemoryCache[host.name] = avgTime
+                    HostLatencyMemoryCache[host.name] = Latency(avgTime)
 
                     emitter.onSuccess(avgTime)
                 } catch (e: Exception) {
-                    HostLatencyMemoryCache[host.name] = null
+                    HostLatencyMemoryCache[host.name] = Latency(0, "Error")
                     emitter.onError(e)
                 }
             }
