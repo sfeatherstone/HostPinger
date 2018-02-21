@@ -1,6 +1,7 @@
 package uk.co.wedgetech.hostpinger.model.tasks
 
 import io.reactivex.Single
+import kotlinx.coroutines.experimental.launch
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.model.HostLatencyMemoryCache
 import uk.co.wedgetech.hostpinger.model.Latency
@@ -36,8 +37,8 @@ object Ping {
 
     internal fun pingServer(host :Host) : Single<Long> {
         val single = Single.create<Long> { emitter ->
-            //TODO stop lots of threads being used
-            val thread = Thread {
+            //This uses a Coroutine. Seems too easy...
+            launch {
                 try {
                     var totalTime: Long = 0
                     for (x in 0..4) {
@@ -54,7 +55,6 @@ object Ping {
                     emitter.onError(e)
                 }
             }
-            thread.start()
         }
         return single
     }

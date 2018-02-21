@@ -23,6 +23,11 @@ android {
     }
 }
 
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
 androidExtensions {
     experimental = true
 }
@@ -74,6 +79,9 @@ dependencies {
     //Async handling
     implementation "io.reactivex.rxjava2:rxjava:2.1.7"
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.2'
 
     //Kotlin shortcuts
     implementation 'androidx.core:core-ktx:0.1'

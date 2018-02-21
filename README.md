@@ -18,12 +18,12 @@ Latency code was adapted from a [sample](https://stackoverflow.com/a/37868059/11
 Latency results are cached to prevent re-testing on rotation.<br>
 Latency is only tested when the host is loaded by the `RecyclerView`. 
 This can be seen by scrolling down on a slow connection. It prevent a very long list from being tested all at once, but limiting you to what you can see on the screen. (This may change when I change how the threading of the tests are run)
+Kotlin experimental coroutines are used for making the latency test non blocking. 
 
 ## TODO
 Setting up `Dagger2` would have been nice, but I haven't found what "a good one looks like" yet for Kotlin. <br>
 The MVP implementation is work in progress. It is not currently lifecycle aware<br>
 Get the recycler to resort dynamically when is latency sort order.<br>
-Changing use of threads when testing hosts (Use threadpool or Kotlin **coroutines**).<br>
 
 ### Retrospective
 I decided to make the host list immutable. This is a good thing, but made storing the latency figures (and sorting the Host list) more difficult.<br>
