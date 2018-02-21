@@ -1,7 +1,5 @@
 package uk.co.wedgetech.hostpinger.ui.mvp
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -15,13 +13,12 @@ import uk.co.wedgetech.hostpinger.UIMode
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.model.NetworkError
 import uk.co.wedgetech.hostpinger.ui.mvvm.HostsAdapter
-import uk.co.wedgetech.hostpinger.ui.mvvm.HostsViewModel
 
 class MainActivity : AppCompatActivity() {
 
     internal lateinit var hostsAdapter : HostsAdapter
-    internal val viewModel : HostsViewModel by lazy { ViewModelProviders.of(this).get(HostsViewModel::class.java) }
     internal val uiMode : UIMode by lazy { UIMode(applicationContext) }
+    internal val presenter : HostsPresenterContract<MainActivity> by lazy { HostsPresenter<MainActivity>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,31 +27,27 @@ class MainActivity : AppCompatActivity() {
 
         hostsAdapter = HostsAdapter()
 
-        //Catch host data
-        val hostsObserver = Observer<List<Host>> { hosts ->
-            if (hosts!=null)    {
-                hostsAdapter.setHosts(hosts)
-            }
-        }
-        viewModel.hosts.observe(this, hostsObserver)
+        presenter.attachView(this)
 
-        //Catch errors
-        val errorObserver = Observer<NetworkError> { t ->
-            if (t!=null) {
-                Toast.makeText(this@MainActivity, getString(R.string.error_host_fetch),
-                        Toast.LENGTH_LONG).show()
-            }
-        }
-        viewModel.error.observe(this, errorObserver)
+        presenter.onHostsChanged { list :List<Host> -> hostsAdapter.setHosts(list) }
 
         //Fetch hosts
-        viewModel.fetchHosts()
+        presenter.fetchHosts({}, //Successful fetch of hosts
+                //Error in fetching hosts
+                { error :NetworkError -> Toast.makeText(this@MainActivity,
+                        getString(R.string.error_host_fetch),Toast.LENGTH_LONG).show() }
+        )
 
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = hostsAdapter
 
         setupSpinner()
         setupAltFrameworkButton()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.detachView()
     }
 
     internal fun setupAltFrameworkButton() {
@@ -81,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                viewModel.sortOrder = position
+                presenter.sortOrder = position
                 // TODO -> sort order part of Presenter/ViewModel
                 uiMode.sortOrder = position
             }

@@ -3,7 +3,7 @@ package uk.co.wedgetech.hostpinger.ui.mvp
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.model.NetworkError
 
-interface HostsPresenterContract{
+interface HostsPresenterContract<T> : BasePresenter<T>{
 
     fun onHostsChanged(changeCallback: (List<Host>)->Unit)
 
