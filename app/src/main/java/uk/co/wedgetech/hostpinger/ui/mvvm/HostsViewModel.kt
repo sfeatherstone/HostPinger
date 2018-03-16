@@ -1,5 +1,6 @@
 package uk.co.wedgetech.hostpinger.ui.mvvm
 
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
@@ -14,7 +15,7 @@ import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.model.NetworkError
 import uk.co.wedgetech.hostpinger.model.tasks.HostService
 
-class HostsViewModel:ViewModel() {
+class HostsViewModel: ViewModel() {
 
     private val hostsService by lazy { HostService() }
 

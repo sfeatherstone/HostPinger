@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
     internal fun setupAltFrameworkButton() {
         val otherMode = uiMode.nextType.asString
-        change_model.text = "Swap to ${otherMode}"
+        change_model.text = "Swap to $otherMode"
         change_model.setOnClickListener {
             uiMode.flipType()
             startActivity(uiMode.getCurrentScreenIntent(this))
@@ -83,8 +83,7 @@ class MainActivity : AppCompatActivity() {
                 // TODO -> sort order part of Presenter/ViewModel
                 uiMode.sortOrder = position
             }
-
         }
-
     }
+
 }
