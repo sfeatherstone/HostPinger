@@ -1,8 +1,8 @@
 package uk.co.wedgetech.hostpinger.ui.mvp
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                         getString(R.string.error_host_fetch),Toast.LENGTH_LONG).show() }
         )
 
-        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         recycler.adapter = hostsAdapter
 
         setupSpinner()
