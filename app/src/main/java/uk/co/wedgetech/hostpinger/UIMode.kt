@@ -3,7 +3,7 @@ package uk.co.wedgetech.hostpinger
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.content.edit
+import androidx.core.content.edit
 
 /***
  * Class stores the current UI mode. It also can be used to find what the next one is, or flip it and get the Intent.
@@ -53,7 +53,7 @@ class UIMode(applicationContext : Context) {
 
     var sortOrder : Int
         get() = sharedPreferences.getInt(KEY_SORT_ORDER, 0)
-        set(value) { sharedPreferences.edit(){putInt(KEY_SORT_ORDER, value)}}
+        set(value) { sharedPreferences.edit(){ putInt(KEY_SORT_ORDER, value) } }
 
     internal fun stringToFramework(str :String): Framework = when(str) {
         Framework.MVP.asString -> Framework.MVP

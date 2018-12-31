@@ -1,7 +1,8 @@
 package uk.co.wedgetech.hostpinger.model.tasks
 
 import io.reactivex.Single
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.model.HostLatencyMemoryCache
 import uk.co.wedgetech.hostpinger.model.Latency
@@ -9,6 +10,7 @@ import uk.co.wedgetech.hostpinger.utils.makeUrl
 import java.net.InetAddress
 import java.net.Socket
 import java.net.URL
+import kotlinx.coroutines.launch
 
 
 object Ping {
@@ -38,7 +40,8 @@ object Ping {
     internal fun pingServer(host :Host) : Single<Long> {
         val single = Single.create<Long> { emitter ->
             //This uses a Coroutine. Seems too easy...
-            launch {
+            //TODO get rid of the GlobalScope
+            GlobalScope.launch {
                 try {
                     var totalTime: Long = 0
                     for (x in 0..4) {

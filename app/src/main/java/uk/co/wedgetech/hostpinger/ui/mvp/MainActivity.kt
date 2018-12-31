@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                         getString(R.string.error_host_fetch),Toast.LENGTH_LONG).show() }
         )
 
-        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = hostsAdapter
 
         setupSpinner()
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     internal fun setupAltFrameworkButton() {
         val otherMode = uiMode.nextType.asString
-        change_model.text = "Swap to ${otherMode}"
+        change_model.text = "Swap to $otherMode"
         change_model.setOnClickListener {
             uiMode.flipType()
             startActivity(uiMode.getCurrentScreenIntent(this))

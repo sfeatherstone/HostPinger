@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         //Fetch hosts
         viewModel.fetchHosts()
 
-        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = hostsAdapter
 
         setupSpinner()
