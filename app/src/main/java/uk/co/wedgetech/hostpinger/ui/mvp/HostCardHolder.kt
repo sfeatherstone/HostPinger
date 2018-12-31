@@ -13,7 +13,7 @@ import uk.co.wedgetech.hostpinger.R
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.model.tasks.Ping
 
-class HostCardHolder(override val containerView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(containerView), LayoutContainer {
+class HostCardHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     internal lateinit var host: Host
 
@@ -31,9 +31,9 @@ class HostCardHolder(override val containerView: View) : androidx.recyclerview.w
         updateLatency(false)
 
         //Click handler
-        containerView.setOnClickListener({ _ ->
+        containerView.setOnClickListener{ _ ->
             updateLatency(true)
-            })
+            }
     }
 
     fun updateLatency(forceUpdate : Boolean) {

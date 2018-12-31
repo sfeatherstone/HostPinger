@@ -7,7 +7,7 @@ import uk.co.wedgetech.hostpinger.R
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.ui.mvvm.HostCardHolder
 
-class HostsAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<HostCardHolder>() {
+class HostsAdapter : RecyclerView.Adapter<HostCardHolder>() {
 
     private var items: List<Host> = List<Host>(0,{Host("","","")})
 
