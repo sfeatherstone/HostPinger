@@ -1,4 +1,4 @@
-package uk.co.wedgetech.hostpinger.ui.mvvm
+package uk.co.wedgetech.hostpinger.ui.common
 
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.card_host.*
@@ -31,9 +31,9 @@ class HostCardHolder(override val containerView: View) : RecyclerView.ViewHolder
         updateLatency(false)
 
         //Click handler
-        containerView.setOnClickListener({ _ ->
+        containerView.setOnClickListener{ _ ->
             updateLatency(true)
-            })
+            }
     }
 
     fun updateLatency(forceUpdate : Boolean) {

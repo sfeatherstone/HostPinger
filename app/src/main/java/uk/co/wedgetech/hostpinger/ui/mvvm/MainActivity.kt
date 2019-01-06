@@ -9,11 +9,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import uk.co.wedgetech.hostpinger.R
 import uk.co.wedgetech.hostpinger.UIMode
 import uk.co.wedgetech.hostpinger.model.Host
 import uk.co.wedgetech.hostpinger.model.NetworkError
+import uk.co.wedgetech.hostpinger.ui.common.HostsAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         //Fetch hosts
         viewModel.fetchHosts()
 
-        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recycler.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         recycler.adapter = hostsAdapter
 
         setupSpinner()

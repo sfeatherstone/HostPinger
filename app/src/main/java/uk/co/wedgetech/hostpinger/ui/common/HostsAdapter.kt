@@ -1,4 +1,4 @@
-package uk.co.wedgetech.hostpinger.ui.mvvm
+package uk.co.wedgetech.hostpinger.ui.common
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
